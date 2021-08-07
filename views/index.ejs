@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+          <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+          <link
+               rel="stylesheet"
+               href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"
+          />
+
+          <link
+               rel="stylesheet"
+               href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css"
+          />
+     </head>
+     <body>
+          <div class="container" class="w-75">
+               <a type="button" href="add-product" class="btn btn-success mb-3 mt-2">+Add New Product</a>
+               <table id="example" style=
+               "margin : auto;"
+               class="table table-striped table-hover">
+               <thead>
+                    <tr>
+                         <th>No</th>
+                         <th>Kategori</th>
+                         <th>Name</th>
+                         <th>Price</th>
+                         <th>Aksi</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <% for(var i=0; i<product.length ; i++) { %> 
+                    <tr>
+                         <td><%= i + 1 %> </td>
+                         <td><%= product[i].kategori %> </td>
+                         <td><%= product[i].name %> </td>
+                         <td><%= product[i].price %> </td>
+                         <td class="d-flex flex-row">
+                              <a href="/update-product?id=<%= product[i]._id %> " class="btn btn-primary me-1" style="height:38px;">
+                                   Edit
+                              </a>
+                              <!-- <form method="" id="tag<%= product[i]._id%>" > -->
+                                   <button  type="submit" id=<%= product[i]._id%> class="btn btn-danger submit-delete" data-id=<%= product[i]._id%> >
+                                        Delete
+                                   </button>
+                              <!-- </form> -->
+                         </td>
+                    </tr>
+                    <% } %>
+               </tbody>
+          </table>
+          
+          </div>
+          <!-- delete script -->
+          <script>
+
+               $('.submit-delete').on('click',function(e) { 
+                    console.log(e.target.id);
+                    //mencegah page reload secara sendiri
+                    e.preventDefault();
+
+                    //nyimpen elemen id yang di targetin ke variable id.
+                    var id = e.target.id
+
+                    var request = {
+                         'url': `http://localhost:3000/api/product/` + id,
+                         'method': 'DELETE',
+                    };
+
+                    if(confirm('Beneran Mau Hapus?')){
+                         $.ajax(request).done(function(response){
+                              console.log('success');
+                              alert('Data udah di hapus coy');
+                              location.reload();
+                         })
+                    }
+               })
+              
+                    
+          </script>
+          
+          <!-- script jquery dan datatables -->
+          <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+          <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+      
+
+          <script>
+               $(document).ready(function () {
+                    $('#example').DataTable();
+               });
+          </script>
+     </body>
+</html>
