@@ -36,36 +36,43 @@
                   <div class="panel panel-default">
                      <div class="panel-body">
                         <div class="form-group">
-                           <label for="kategori"
-                              >Category Name:
-                           </label>
+                           <label for="productID">Product ID: </label>
                            <input
                               type="text"
-                              id="kategori"
+                              id="productID"
                               class="form-control"
-                              name="kategori"
+                              name="productID"
+                           />
+                        </div>
+                        <div class="form-group">
+                           <label for="productName">Product Name: </label>
+                           <input
+                              type="text"
+                              id="productName"
+                              class="form-control"
+                              name="productName"
                               
                            />
                         </div>
                         <div class="form-group">
-                           <label for="name">Product Name: </label>
+                           <label for="productDesc">Product Description: </label>
                            <input
                               type="text"
-                              id="name"
+                              id="productDesc"
                               class="form-control"
-                              name="name"
-                              
+                              name="productDesc"
+                              style="height: 50px;"     
                            />
                         </div>
                         <div class="form-group">
-                           <label for="price">Product Price: </label>
-                           <input
+                           <label for="productDesc">Product Rating: </label>
+                           <textarea
                               type="text"
-                              id="price"
+                              id="productRating"
                               class="form-control"
-                              name="price"
-                              
-                           />
+                              name="productRating"
+                           >
+                        </textarea>
                         </div>
                         <button
                            type="submit"
@@ -93,11 +100,11 @@
                               console.log(data);
 
                               var request = {
-                                 'url': `http://localhost:3000/api/products`,
+                                 'url': `http://localhost:3000/api/product`,
                                  'method': 'POST',
                                  'data': data,
                               };
-
+                                 
                               $.ajax(request).done(function (response) {
                                  console.log('success');
                                  alert('Success ditambahin ke database')
@@ -106,9 +113,7 @@
                                  }, 1000);
                               });
                         });
-
                         </script>
-                        
                      </div>
                   </div>
                </form>

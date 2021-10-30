@@ -2,11 +2,11 @@
 var router = require('express').Router();
 const { response } = require('express');
 
-//import controller Product
-const productController = require('../controllers/productController');
+//import controller produsen
+const produsenController = require('../controllers/produsenController');
 
-//import models product.
-const product = require('../models/product');
+//import models produsen.
+const produsen = require('../models/produsen');
 
 //import axios untuk membantu di server
 const axios = require('axios');
@@ -20,28 +20,28 @@ const axios = require('axios');
 
 router.get('/', function (req, res) {
    axios
-      .get('http://localhost:3000/api/product')
+      .get('http://localhost:3000/api/produsen')
       .then(function (response) {
          console.log(response.data);
-         res.render('index', { product: response.data });
+         res.render('index', { produsen: response.data });
       })
       .catch((err) => {
          res.send(err);
       });
 });
 
-router.get('/add-product', (req, res) => {
-   res.render('main/add-product');
+router.get('/add-produsen', (req, res) => {
+   res.render('routing-produsen/add-produsen');
 });
 
-router.get('/update-product', (req, res) => {
+router.get('/update-produsen', (req, res) => {
    axios
-      .get('http://localhost:3000/api/product', {
+      .get('http://localhost:3000/api/produsen', {
          params: { id: req.query.id },
       })
       .then(function (response) {
-         res.render('main/update-product', {
-            product: response.data,
+         res.render('routing-produsen/update-produsen', {
+            produsen: response.data,
          });
       });
 });
@@ -51,8 +51,8 @@ router.get('/update-product', (req, res) => {
  *  @method GET,POST,PUT,DELETE /
  */
 
-router.post('/api/product', productController.create);
-router.get('/api/product', productController.fetch);
-router.put('/api/product/:id', productController.update);
-router.delete('/api/product/:id', productController.delete);
+router.post('/api/produsen', produsenController.create);
+router.get('/api/produsen', produsenController.fetch);
+router.put('/api/produsen/:id', produsenController.update);
+router.delete('/api/produsen/:id', produsenController.delete);
 module.exports = router;
