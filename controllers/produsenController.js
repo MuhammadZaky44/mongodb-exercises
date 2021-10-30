@@ -1,7 +1,7 @@
-// Import Modul Product
-var Product = require('../models/product');
+// Import Modul Produsen
+var Produsen = require('../models/produsen');
 
-// Create Product
+// Create Produsen
 exports.create = (req, res) => {
    // validasi apakah body ada atau tidak
    console.log(req.body);
@@ -12,16 +12,16 @@ exports.create = (req, res) => {
       return;
    }
 
-   // new Product Silahkan disini dari baris 16-dst
-   var product = new Product();
-   product.productID = req.body.productID;
-   product.productName = req.body.productName;
-   product.productDesc = req.body.productDesc;
-   product.productRating = req.body.productRating;
+   // new Produsen Silahkan disini dari baris 16-dst
+   var produsen = new Produsen();
+   produsen.produsenID = req.body.produsenID;
+   produsen.productID = req.body.productID;
+   produsen.companyName = req.body.companyName;
+   produsen.produsenLocation = req.body.produsenLocation;
 
    // save ke DB
    try {
-      product.save().then((data) => {
+      produsen.save().then((data) => {
          res.send(data);
          //res.redirect('/');
       });
@@ -36,23 +36,23 @@ exports.fetch = (req, res) => {
    if (req.query.id) {
       const id = req.query.id;
 
-      Product.findById(id)
-      .then((data) => {
-         if (!data) {
-            res.status(404).send ({
-               message: `User dengan id ${id} tidak ketemu. `,
+      Produsen.findById(id)
+         .then((data) => {
+            if (!data) {
+               res.status(404).send({
+                  message: `User dengan id ${id} tidak ketemu. `,
+               });
+            } else {
+               res.send(data);
+            }
+         })
+         .catch((err) => {
+            res.status(500).send({
+               message: 'Terjadi error pada update user information.',
             });
-         } else {
-            res.send(data);
-         }
-      })
-      .catch((err) => {
-         res.status(500).send ({
-            message: 'Terjadi error pada update user information.',
          });
-      });
    } else {
-      Product.find()
+      Produsen.find()
          .then((data) => {
             res.send(data);
          })
@@ -73,12 +73,12 @@ exports.update = (req, res) => {
 
    //gunakan method findByIdAndUpdate ditentukan dari id dan req bodynya.
    // clue NamaModel.findByIdAndUpdate()
-   Product.findByIdAndUpdate(id, req.body, {
+   Produsen.findByIdAndUpdate(id, req.body, {
       useFindAndModify: false,
    })
       .then((data) => {
          if (!data) {
-            res.status(404).send ({
+            res.status(404).send({
                message: `User dengan id ${id} tidak ketemu. `,
             });
          } else {
@@ -86,7 +86,7 @@ exports.update = (req, res) => {
          }
       })
       .catch((err) => {
-         res.status(500).send ({
+         res.status(500).send({
             message: 'Terjadi error pada update user information.',
          });
       });
@@ -98,10 +98,10 @@ exports.delete = (req, res) => {
 
    //findByID and Delete dari product
    // NamaModel.findByIdAndDelete
-   Product.findByIdAndDelete(id)
+   Produsen.findByIdAndDelete(id)
       .then((data) => {
          if (!data) {
-            res.status(400).send ({
+            res.status(400).send({
                message: `Ada yang salah dengan ${id}. `,
             });
          } else {
@@ -111,7 +111,7 @@ exports.delete = (req, res) => {
          }
       })
       .catch((err) => {
-         res.status(500).send ({
+         res.status(500).send({
             message: `Terdapat kesalahan pada ${id}.`,
          });
       });

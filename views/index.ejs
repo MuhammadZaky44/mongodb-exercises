@@ -31,9 +31,10 @@
                <thead>
                     <tr>
                          <th>No</th>
-                         <th>Kategori</th>
-                         <th>Name</th>
-                         <th>Price</th>
+                         <th>Product ID</th>
+                         <th>Product Name</th>
+                         <th>Product Description</th>
+                         <th>Product Rating</th>
                          <th>Aksi</th>
                     </tr>
                </thead>
@@ -41,9 +42,10 @@
                     <% for(var i=0; i<product.length ; i++) { %> 
                     <tr>
                          <td><%= i + 1 %> </td>
-                         <td><%= product[i].kategori %> </td>
-                         <td><%= product[i].name %> </td>
-                         <td><%= product[i].price %> </td>
+                         <td><%= product[i].productID %> </td>
+                         <td><%= product[i].productName %> </td>
+                         <td><%= product[i].productDesc %> </td>
+                         <td><%= product[i].productRating %> </td>
                          <td class="d-flex flex-row">
                               <a href="/update-product?id=<%= product[i]._id %> " class="btn btn-primary me-1" style="height:38px;">
                                    Edit
